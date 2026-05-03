@@ -1,0 +1,6 @@
+
+BUN_NAME = "Bulochka"
+BUN_PRICE = 100
+
+INGREDIENT_NAME = 'cheese'
+INGREDIENT_PRICE = 100
