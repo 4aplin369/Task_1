@@ -7,19 +7,17 @@ from praktikum.burger import Burger
 from praktikum.ingredient import Ingredient
 from praktikum.bun import Bun
 
-class TestBurger():
 
+class TestBurger:
     def test_burger_empty_buns(self):
         burger = Burger()
 
         assert burger.bun is None
 
-
     def test_burger_empty_ingredients(self):
         burger = Burger()
 
         assert burger.ingredients == []
-
 
     def test_burger_set_bun(self):
         burger = Burger()
@@ -27,7 +25,6 @@ class TestBurger():
 
         burger.set_buns(bun_mock)
         assert burger.bun == bun_mock
-
 
     def test_burger_add_ingredient(self):
         burger = Burger()
@@ -53,8 +50,10 @@ class TestBurger():
         burger.add_ingredient(ingredient_mock_2)
 
         burger.move_ingredient(0, 1)
-        assert burger.ingredients[0] == ingredient_mock_2 and burger.ingredients[-1] == ingredient_mock_1
-
+        assert (
+            burger.ingredients[0] == ingredient_mock_2
+            and burger.ingredients[-1] == ingredient_mock_1
+        )
 
     @pytest.mark.parametrize(
         "ingredient_list, price",
@@ -63,16 +62,15 @@ class TestBurger():
     )
     def test_burger_get_price(self, ingredient_list, price):
         burger = Burger()
-        bun = Bun('lavash', 10)
+        bun = Bun("lavash", 10)
 
-        burger.set_buns(bun)   
+        burger.set_buns(bun)
 
         for i in ingredient_list:
             ingredient = Ingredient(*i)
             burger.add_ingredient(ingredient)
 
         assert burger.get_price() == price
-
 
     @pytest.mark.parametrize(
         "ingredient_list, price",
@@ -81,10 +79,10 @@ class TestBurger():
     )
     def test_burger_get_receipt(self, ingredient_list, price):
         burger = Burger()
-        bun = Bun('lavash', 10)
+        bun = Bun("lavash", 10)
 
-        burger.set_buns(bun)   
-         
+        burger.set_buns(bun)
+
         for i in ingredient_list:
             ingredient = Ingredient(*i)
             burger.add_ingredient(ingredient)
@@ -92,53 +90,3 @@ class TestBurger():
         receipt = burger.get_receipt()
 
         assert bun.get_name(), burger.get_price() in receipt
-
-
-
-
-
-
-
-
-# # class Burger:
-#     """
-#     Модель бургера.
-#     Бургер состоит из булочек и ингредиентов (начинка или соус).
-#     Ингредиенты можно перемещать и удалять.
-#     Можно распечать чек с информацией о бургере.
-#     """
-
-#     def __init__(self):
-#         self.bun = None
-#         self.ingredients: List[Ingredient] = []
-
-#     def set_buns(self, bun: Bun):
-#         self.bun = bun
-
-#     def add_ingredient(self, ingredient: Ingredient):
-#         self.ingredients.append(ingredient)
-
-#     def remove_ingredient(self, index: int):
-#         del self.ingredients[index]
-
-#     def move_ingredient(self, index: int, new_index: int):
-#         self.ingredients.insert(new_index, self.ingredients.pop(index))
-
-#     def get_price(self) -> float:
-#         price = self.bun.get_price() * 2
-
-#         for ingredient in self.ingredients:
-#             price += ingredient.get_price()
-
-#         return price
-
-#     def get_receipt(self) -> str:
-#         receipt: List[str] = [f'(==== {self.bun.get_name()} ====)']
-
-#         for ingredient in self.ingredients:
-#             receipt.append(f'= {str(ingredient.get_type()).lower()} {ingredient.get_name()} =')
-
-#         receipt.append(f'(==== {self.bun.get_name()} ====)\n')
-#         receipt.append(f'Price: {self.get_price()}')
-
-#         return '\n'.join(receipt)
