@@ -1,0 +1,14 @@
+__pycache__
+
+__init__.py
+
+pytest.ini
+
+.venv*
+
+.pytest_cache
+
+settings.json
+
+.vscode
+.coverage
